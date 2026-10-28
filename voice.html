@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bava's Birthday</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<style>
+  .voicecard{
+    width:100%; max-width:420px; background:var(--paper); color:var(--ink);
+    border-radius:20px; padding:22px 20px; margin:18px 0; text-align:left;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+  }
+  .voicecard h3{ font-family:var(--display); color:var(--purple); margin:0 0 4px; font-size:1.2rem; }
+  .voicecard p{ margin:0 0 14px; font-size:.9rem; opacity:.75; }
+  .voicecard audio{ width:100%; }
+  .lockbox{
+    max-width:420px; background:var(--paper); color:var(--ink); border-radius:20px;
+    padding:28px 22px; box-shadow:0 8px 24px rgba(0,0,0,.25);
+  }
+  .lockbox .icon{ font-size:48px; }
+  .lockbox p{ margin-top:10px; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <h1 class="title" style="font-size:2.2rem;">A little surprise</h1>
+
+  <!-- Locked state: shown until the unlock moment -->
+  <div class="lockbox" id="lockbox" hidden>
+    <div class="icon">🔒</div>
+    <p><b>This surprise opens on October 30 at 12:00 AM.</b></p>
+    <p class="countlabel" id="countLabel" style="color:var(--ink);"></p>
+    <div class="count" id="countdown" style="margin-top:10px;">
+      <div class="tile"><b id="cd-d">0</b><span>days</span></div>
+      <div class="tile"><b id="cd-h">0</b><span>hours</span></div>
+      <div class="tile"><b id="cd-m">0</b><span>min</span></div>
+      <div class="tile"><b id="cd-s">0</b><span>sec</span></div>
+    </div>
+  </div>
+
+  <div id="unlocked" hidden>
+    <div class="voicecard">
+      <h3>Voice message 1</h3>
+      <audio controls src="wishes1.mp4"></audio>
+    </div>
+
+    <div class="voicecard">
+      <h3>Voice message 2</h3>
+      <audio controls src="wishes2.mp4"></audio>
+    </div>
+
+  </div>
+</section>
+
+<script>
+
+var UNLOCK = new Date(2026, 9, 30, 0, 0, 0);
+
+  var lockbox = document.getElementById('lockbox');
+  var unlocked = document.getElementById('unlocked');
+
+  function tick(){
+    var now = new Date();
+    var diff = UNLOCK - now;
+
+    if (diff <= 0){
+      lockbox.hidden = true;
+      if (unlocked.hidden){
+        unlocked.hidden = false;
+        if (typeof confetti === 'function'){
+          confetti({ particleCount: 140, spread: 100, origin: { y: 0.6 } });
+        }
+      }
+      return;
+    }
+
+    lockbox.hidden = false;
+    unlocked.hidden = true;
+    document.getElementById('countLabel').textContent = 'Unlocks in';
+    document.getElementById('cd-d').textContent = Math.floor(diff/864e5);
+    document.getElementById('cd-h').textContent = Math.floor(diff%864e5/36e5);
+    document.getElementById('cd-m').textContent = Math.floor(diff%36e5/6e4);
+    document.getElementById('cd-s').textContent = Math.floor(diff%6e4/1e3);
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>

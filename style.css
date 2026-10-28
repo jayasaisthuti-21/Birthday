@@ -1,0 +1,135 @@
+/* ===== Shared styles — Bava's Birthday ===== */
+:root{
+  --ink:#241447; --paper:#FFFFFF;
+  --pink:#FF6FA3; --gold:#FFB800; --teal:#19C3B1; --purple:#6a0dad; --violet:#cc66ff;
+  --display:'Fredoka One', cursive;
+  --body:'Poppins', sans-serif;
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0; font-family:var(--body); color:#fff;
+  background:linear-gradient(135deg,#ff4b4b,#ff9f43,#ffe066,#5edc7b,#4ecdc4,#4d96ff,#9b5de5,#f15bb5);
+  background-size:300% 300%;
+  animation:rainbow-bg 12s ease infinite;
+  min-height:100vh;
+}
+@keyframes rainbow-bg{
+  0%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+  100%{ background-position:0% 50%; }
+}
+a{ text-decoration:none; }
+
+header{
+  padding:20px; text-align:center; font-family:var(--display); font-size:22px;
+  color:#fff; background:rgba(0,0,0,.18);
+  text-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+
+.page{
+  min-height:calc(100vh - 68px);
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:60px 20px;
+}
+
+.btn{
+  display:inline-block; margin-top:34px; padding:14px 32px; font-size:18px;
+  font-family:var(--body); font-weight:700; color:#fff; border-radius:30px; border:0;
+  background:linear-gradient(90deg,#ff1744,#ff9100,#ffea00,#00e676,#00b0ff,#651fff,#d500f9);
+  background-size:200% auto;
+  box-shadow:0 4px 15px rgba(255,255,255,.45); cursor:pointer;
+  animation:rainbow-text 5s linear infinite;
+  transition:transform .25s, box-shadow .25s;
+}
+ .btn:hover{ transform:scale(1.07); box-shadow:0 6px 20px rgba(255,255,255,.75); }
+
+/* ---- unlock countdown ---- */
+.lockbox{
+  max-width:420px; background:var(--paper); color:var(--ink); border-radius:20px;
+  padding:28px 22px; margin:20px 0; box-shadow:0 8px 24px rgba(0,0,0,.25);
+  text-align:center;
+}
+.lockbox .icon{ font-size:48px; }
+.lockbox p{ margin-top:10px; }
+
+/* ---- hero / index ---- */
+.title{
+  font-family:var(--display); font-size:clamp(2.2rem,8vw,3.6rem);
+  background:linear-gradient(90deg,#ff1744,#ff9100,#ffea00,#00e676,#00b0ff,#651fff,#d500f9);
+  background-size:200% auto;
+  color:#fff;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:rainbow-text 5s linear infinite;
+  filter:drop-shadow(0 3px 8px rgba(0,0,0,.25));
+}
+@keyframes rainbow-text{ to{ background-position:200% center; } }
+.sub{ font-family:var(--display); font-size:1.3rem; color:var(--pink); margin-top:10px; }
+.countlabel{ margin-top:36px; font-weight:700; }
+.count{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; justify-content:center; }
+.count[hidden]{ display:none; }
+.tile{ min-width:70px; padding:12px 6px; border-radius:16px; color:var(--ink); }
+.tile:nth-child(1){ background:var(--gold); }
+.tile:nth-child(2){ background:var(--pink); }
+.tile:nth-child(3){ background:var(--teal); }
+.tile:nth-child(4){ background:#fff; }
+.tile b{ display:block; font-family:var(--display); font-size:1.7rem; }
+.tile span{ font-size:.8rem; font-weight:700; }
+
+/* ---- wishes ---- */
+.wish{ max-width:640px; margin:14px auto; padding:16px 0; border-top:2px solid rgba(255,255,255,.3); }
+.wish:first-of-type{ border-top:0; }
+.wish .lang{ font-weight:700; font-size:.85rem; opacity:.8; }
+.wish .big{ font-family:var(--display); font-size:clamp(1.3rem,5vw,1.9rem); color:var(--gold); }
+.wish .small{ font-size:1rem; opacity:.9; }
+.letter{
+  max-width:640px; margin:30px auto 0; background:var(--paper); color:var(--ink);
+  border-radius:8px; padding:26px 22px; text-align:left; transform:rotate(-.6deg);
+  box-shadow:0 0 0 4px rgba(255,255,255,.6), 8px 8px 24px rgba(60,30,120,.35);
+}
+.letter h3{ font-family:var(--display); color:var(--pink); margin:0 0 10px; }
+.letter p + p{ margin-top:12px; }
+
+/* ---- gallery ---- */
+.photos{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:20px;
+  max-width:720px; margin-top:10px;
+}
+.polaroid{ background:var(--paper); color:var(--ink); padding:10px 10px 12px; border-radius:4px; }
+.polaroid:nth-child(odd){ transform:rotate(-2.5deg); }
+.polaroid:nth-child(even){ transform:rotate(2deg); }
+.frame{ aspect-ratio:1; border-radius:2px; display:grid; place-items:center; font-size:48px; overflow:hidden; }
+.frame img{ width:100%; height:100%; object-fit:cover; }
+.polaroid:nth-child(4n+1) .frame{ background:var(--gold); }
+.polaroid:nth-child(4n+2) .frame{ background:var(--pink); }
+.polaroid:nth-child(4n+3) .frame{ background:var(--violet); }
+.polaroid:nth-child(4n) .frame{ background:var(--teal); }
+.polaroid figcaption{ font-family:var(--display); margin-top:8px; font-size:.95rem; }
+
+/* ---- memories / timeline ---- */
+.timeline{ list-style:none; max-width:560px; margin:10px auto 0; padding:0 0 0 6px; border-left:3px solid var(--gold); text-align:left; }
+.timeline li{ position:relative; padding:0 0 24px 24px; }
+.timeline li::before{ content:""; position:absolute; left:-13px; top:6px; width:16px; height:16px; border-radius:50%; background:var(--pink); border:3px solid var(--gold); }
+.timeline .when{ font-family:var(--display); color:var(--gold); display:block; font-size:1.1rem; }
+
+/* ---- quiz ---- */
+.quizbox{ max-width:560px; width:100%; background:var(--paper); color:var(--ink); border-radius:20px; padding:24px 20px; margin-top:30px; }
+.qcount{ font-weight:700; font-size:.85rem; opacity:.7; }
+.q{ font-family:var(--display); font-size:1.3rem; margin:6px 0 14px; color:var(--purple); }
+.opt{ display:block; width:100%; text-align:left; font:700 .95rem var(--body); color:var(--ink); background:#f4eefc; border:2px solid var(--purple); border-radius:12px; padding:10px 14px; margin:8px 0; cursor:pointer; }
+.opt:disabled{ cursor:default; }
+.opt.right{ background:var(--teal); color:#fff; border-color:var(--teal); }
+.opt.wrong{ background:var(--pink); color:#fff; border-color:var(--pink); }
+.note{ margin-top:10px; min-height:1.5em; font-weight:700; }
+
+/* ---- final page ---- */
+.animated-text{ font-weight:700; }
+.closing-title{ font-family:var(--display); font-size:2.6rem; color:#fff; text-shadow:0 0 15px var(--gold); }
+.hearts{ position:relative; width:100%; max-width:300px; height:100px; overflow:hidden; margin-top:20px; }
+.hearts::before, .hearts::after{ content:"\1F496"; position:absolute; font-size:26px; animation:float 6s infinite; }
+.hearts::before{ left:30%; animation-delay:0s; }
+.hearts::after{ left:60%; animation-delay:3s; }
+@keyframes float{ 0%{ bottom:-30px; opacity:0; } 50%{ opacity:1; } 100%{ bottom:100px; opacity:0; } }
+
+@media (prefers-reduced-motion:reduce){ * { animation:none !important; transition:none !important; } }

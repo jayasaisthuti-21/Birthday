@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bava's Birthday</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<section class="page">
+  <div class="lockbox" id="lockbox" hidden>
+    <div class="icon">🔒</div>
+    <p><b>This website opens on October 30 at 12:00 AM.</b></p>
+    <p class="countlabel" id="countLabel" style="color:var(--ink);"></p>
+    <div class="count" id="countdown" style="margin-top:10px;">
+      <div class="tile"><b id="cd-d">0</b><span>days</span></div>
+      <div class="tile"><b id="cd-h">0</b><span>hours</span></div>
+      <div class="tile"><b id="cd-m">0</b><span>min</span></div>
+      <div class="tile"><b id="cd-s">0</b><span>sec</span></div>
+    </div>
+  </div>
+
+  <div id="websiteContent" hidden>
+    <h1 class="title" id="title">Happy Birthday, My Love❤️</h1>
+
+    <article class="letter" style="margin-top:30px;">
+      <h3>A little surprise!</h3>
+      <p>Happy Birthday, Bava ❤️🥰😘🫂</p>
+      <p>I hope you enjoy this surprise and that it brings a smile to your face. You deserve all the happiness in the world on your birthday and every day.</p>
+      <p>Have the happiest birthday ever!</p>
+      <p>Sorry bava, this is a small surprise, so I can't tell you everything yet. But I promise it will be worth it! 🥰</p>
+        <p>With all my love,</p>
+        <p>         -Your Mardal ❤️</p>
+    </article>
+
+    <a href="voice.html" class="btn" id="goBtn">Surprise 🎁</a>
+  </div>
+</section>
+
+<script>
+  var UNLOCK = new Date(2026, 9, 30, 0, 0, 0);
+  var lockbox = document.getElementById('lockbox');
+  var websiteContent = document.getElementById('websiteContent');
+
+  function tick(){
+    var diff = UNLOCK - new Date();
+
+    if (diff <= 0){
+      lockbox.hidden = true;
+      websiteContent.hidden = false;
+      return;
+    }
+
+    lockbox.hidden = false;
+    websiteContent.hidden = true;
+    document.getElementById('countLabel').textContent = 'Opens in';
+    document.getElementById('cd-d').textContent = Math.floor(diff / 864e5);
+    document.getElementById('cd-h').textContent = Math.floor(diff % 864e5 / 36e5);
+    document.getElementById('cd-m').textContent = Math.floor(diff % 36e5 / 6e4);
+    document.getElementById('cd-s').textContent = Math.floor(diff % 6e4 / 1e3);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+
+  document.getElementById('goBtn').addEventListener('click', function(){
+    if (typeof confetti === 'function'){
+      confetti({ particleCount: 120, spread: 90, origin: { y: 0.6 } });
+    }
+  });
+</script>
+</body>
+</html>
